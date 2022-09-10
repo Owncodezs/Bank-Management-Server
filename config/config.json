@@ -1,0 +1,10 @@
+{
+    "development": {
+        "PORT": 4000,
+        "MONGODB_URL" :"mongodb+srv://owndb:VInxk9KEBPe3RMcU@cluster0.ncpvelk.mongodb.net/gatepass1"
+    },
+    "production": {
+        "PORT": 80,
+        "MONGODB_URL" :"mongodb+srv://owndb:VInxk9KEBPe3RMcU@cluster0.ncpvelk.mongodb.net/Gatepas"
+    }
+}
