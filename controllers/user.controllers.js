@@ -42,7 +42,7 @@ exports.login= (req,res,next)=>{
 
         });
     })
-}  
+}
 exports.logout=(req,res,next)=>{
     console.log('logout')
     res.clearCookie("token")

@@ -4,7 +4,7 @@ function execute (sql,result){
         if (errs) this.callback(errs); 
         })
 }
-
+ 
 async function transfers(req,callback){
     const {from_ac,to_ac,amount} =req.body;
     pool.getConnection((err, result) => {
@@ -40,14 +40,14 @@ async function transfers(req,callback){
             })  
             
         }
-    })
+    }) 
 }
 async function checkblance(req,callback){
-    const {ac_no}=req.body;
+    const user_acno =req.user_acno;
     pool.getConnection((err,result)=>{
         if (err) callback(err)
         else{
-            var sql = `SELECT * FROM account NATURAL JOIN cif WHERE ac_no=${ac_no}`;
+            var sql = `SELECT * FROM account NATURAL JOIN cif WHERE ac_no=${user_acno}`;
             result.query(sql, (err, row, field) => {
                 if (err) callback(err);
                 console.log(row[0])
@@ -58,16 +58,14 @@ async function checkblance(req,callback){
     })
 }
 async function statement(req,callback){
-    const {user_acno}=req.body;
-    // ac_no=2001
-    console.log('errr')
+    const user_acno =req.user_acno;
     pool.getConnection((err,result)=>{
         if (err) callback(err)
         else{
             var sql = `SELECT * FROM statement WHERE ac_no=${user_acno}`;
             result.query(sql, (err, row, field) => {
                 if (err) callback(err);
-                console.log(row)
+                // console.log('hi',row)
                 return callback(null,{message:"sucess",status:true,row })
 
             });
@@ -75,7 +73,9 @@ async function statement(req,callback){
     })
 }
 async function addpayer(req,callback){
-    const {user_acno,payer_name,payer_acno}=req.body;
+    const {payer_name,payer_acno}=req.body;
+    const user_acno =req.user_acno;
+    console.log('user_acno',user_acno)
     pool.getConnection((err,result)=>{
         if (err) callback(err)
         else{
@@ -89,14 +89,15 @@ async function addpayer(req,callback){
     })
 }
 async function viewpayer(req,callback){
-    const {user_acno}=req.body;
+    const user_acno =req.user_acno;
+    console.log('hi',user_acno)
     pool.getConnection((err,result)=>{
         if (err) callback(err)
         else{
             var sql = `SELECT payer_acno,payer_name FROM payer WHERE ac_no=${user_acno}`;
             result.query(sql, (err, row, field) => {
                 if (err) callback(err);
-                console.log(row)
+                // console.log(row)
                 return callback(null,{message:"sucess",status:true,row })
 
             });

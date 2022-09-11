@@ -5,9 +5,6 @@ Mysql db and express server
 ###### open new CMD
 
 ```
-
-cd server
-
 npm install
 
 npm start

@@ -30,7 +30,7 @@ exports.checkblance=(req,res,next)=>{
         }
     })
 
-}
+} 
 exports.statement=(req,res,next)=>{
     console.log("check statement")
     bankService.statement(req,(error,result)=>{
