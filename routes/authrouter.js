@@ -5,6 +5,8 @@ const router=express.Router();
 
 router.post("/register",userController.register);
 router.post("/login",userController.login);
-router.post("/logout",auth.verifyToken,userController.logout)
+router.post("/logout",auth.verifyToken,userController.logout);
+router.post("/check",auth.verifiedSession);
+
 module.exports=router;
   

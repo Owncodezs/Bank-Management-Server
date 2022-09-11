@@ -28,7 +28,7 @@ exports.login= (req,res,next)=>{
         if(error){
             return next(error); 
         }
-        console.log('token',result) 
+        console. log('token',result) 
         res.cookie('token',result.token, {
             secure: false,
             httpOnly: true,
@@ -46,6 +46,10 @@ exports.login= (req,res,next)=>{
 exports.logout=(req,res,next)=>{
     console.log('logout')
     res.clearCookie("token")
+    return res.status(200).send({
+        message:'logout sucess ',
+        status:true
+    });
 
 }
 exports.userProfil=(req,res,next)=>{

@@ -29,6 +29,6 @@ app.use("/profil",auth.verifyToken,require("./routes/profilrouter"))
 app.use(errors.errorHandler);
 
 const port=process.env.PORT ||4000;
- 
+
 app.listen( port ,()=>console.log(`server is running on port ${port}`));
 

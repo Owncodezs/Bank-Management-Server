@@ -11,31 +11,44 @@ function authenticaticateToken(req,res,next){
         next();
     });
 }
-
+//user_acno
 function generteAccessToken(username){
-    return jwt.sign({username:username},"Snipped_SceretKEY",{
+    return jwt.sign({user_acno:username},"Snipped_SceretKEY",{
         expiresIn :'1h',
     })
 }
 
-const config = process.env;
-
 function verifyToken(req, res, next){
-
+ 
   const token =
     req.body.token || req.cookies["token"] || req.headers["token"]  ;
 
   if (!token) {
-    return res.status(403).send("A token is required for authentication");
-  }
-  try {
+    return res.status(403).send("Please login");
+  } 
+  try { 
     const decoded = jwt.verify(token,"Snipped_SceretKEY");
-    req.user = decoded;
+    console.log('verify',decoded,'user',req.user)
+    req.user_acno = decoded.user_acno;
+    console.log('user',req.user_acno)
   } catch (err) {
     return res.status(401).send("Invalid Token");
   }
   console.log('verified')
-  return next();
+  return next(); 
 };
-
-module.exports={authenticaticateToken,generteAccessToken,verifyToken};
+function verifiedSession(req,res){
+  const token = req.body["token"] ;
+    // req.body.token || req.cookies["token"] || req.headers["token"]  ;
+  console.log('yu',token) 
+  if (!token) { 
+    return res.status(200).send({message:"Please login",status:false});
+  }
+  try {
+    const decoded = jwt.verify(token,"Snipped_SceretKEY");
+    return res.status(200).send({message:` welcon back ${decoded.user_acno}` ,status:true})
+  } catch (err) {
+    return res.status(200).send({message:"Invalid Token",status:false});
+  }
+}
+module.exports={authenticaticateToken,generteAccessToken,verifyToken,verifiedSession}
