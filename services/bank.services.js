@@ -4,9 +4,9 @@ function execute (sql,result){
         if (errs) this.callback(errs); 
         })
 }
- 
 async function transfers(req,callback){
     const {from_ac,to_ac,amount} =req.body;
+    console.log(from_ac,to_ac,amount)
     pool.getConnection((err, result) => {
         if (err) callback(err.message)
         else {

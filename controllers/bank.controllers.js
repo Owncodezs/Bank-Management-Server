@@ -46,7 +46,7 @@ exports.statement=(req,res,next)=>{
         }
     })
 
-}
+} 
 exports.addpayer=(req,res,next)=>{
     console.log("addpayer")
     bankService.addpayer(req,(error,result)=>{
